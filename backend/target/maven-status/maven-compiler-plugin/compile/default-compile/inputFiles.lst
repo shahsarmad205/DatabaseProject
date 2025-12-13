@@ -1,0 +1,17 @@
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/controller/MaintenanceRequestController.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/controller/LeaseAgreementController.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/entity/Tenant.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/repository/TenantRepository.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/controller/ApartmentUnitController.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/entity/LeaseAgreement.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/entity/MaintenanceRequest.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/ApartmentManagementApplication.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/repository/MaintenanceRequestRepository.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/repository/LeaseAgreementRepository.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/controller/TenantController.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/repository/ApartmentUnitRepository.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/entity/ApartmentUnit.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/entity/Building.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/repository/BuildingRepository.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/DatabaseConfig.java
+/Users/sarmadshah/Desktop/CMPSC Databases /Final_project/backend/src/main/java/com/apartmentmanagement/controller/BuildingController.java

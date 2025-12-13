@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Apartment Management System</h1>
+        <nav>
+            <button onclick="showSection('buildings')">Buildings</button>
+            <button onclick="showSection('units')">Units</button>
+            <button onclick="showSection('tenants')">Tenants</button>
+            <button onclick="showSection('leases')">Leases</button>
+            <button onclick="showSection('maintenance')">Maintenance</button>
+        </nav>
+        
+        <div id="buildings" class="section">
+            <h2>Buildings</h2>
+            <button onclick="loadBuildings()">Load Buildings</button>
+            <button onclick="showBuildingForm()">Add Building</button>
+            <div id="buildingsList"></div>
+            <div id="buildingForm" style="display:none;">
+                <input id="bName" placeholder="Name"><br>
+                <input id="bAddress" placeholder="Address"><br>
+                <button onclick="saveBuilding()">Save</button>
+            </div>
+        </div>
+        
+        <div id="units" class="section" style="display:none;">
+            <h2>Apartment Units</h2>
+            <button onclick="loadUnits()">Load Units</button>
+            <button onclick="showUnitForm()">Add Unit</button>
+            <div id="unitsList"></div>
+            <div id="unitForm" style="display:none;">
+                <input id="uNumber" placeholder="Unit Number"><br>
+                <input id="uBedrooms" placeholder="Bedrooms"><br>
+                <input id="uRent" placeholder="Rent"><br>
+                <input id="uBuildingId" placeholder="Building ID"><br>
+                <button onclick="saveUnit()">Save</button>
+            </div>
+        </div>
+        
+        <div id="tenants" class="section" style="display:none;">
+            <h2>Tenants</h2>
+            <button onclick="loadTenants()">Load Tenants</button>
+            <button onclick="showTenantForm()">Add Tenant</button>
+            <div id="tenantsList"></div>
+            <div id="tenantForm" style="display:none;">
+                <input id="tName" placeholder="Name"><br>
+                <input id="tEmail" placeholder="Email"><br>
+                <input id="tPhone" placeholder="Phone"><br>
+                <button onclick="saveTenant()">Save</button>
+            </div>
+        </div>
+        
+        <div id="leases" class="section" style="display:none;">
+            <h2>Lease Agreements</h2>
+            <button onclick="loadLeases()">Load All Leases</button>
+            <button onclick="loadActiveLeases()">Load Active Leases</button>
+            <button onclick="showLeaseForm()">Add Lease</button>
+            <div id="leasesList"></div>
+            <div id="leaseForm" style="display:none;">
+                <input id="lStartDate" type="date" placeholder="Start Date"><br>
+                <input id="lEndDate" type="date" placeholder="End Date"><br>
+                <input id="lRent" placeholder="Monthly Rent"><br>
+                <input id="lActive" type="checkbox"> Active<br>
+                <input id="lTenantId" placeholder="Tenant ID"><br>
+                <input id="lUnitId" placeholder="Unit ID"><br>
+                <button onclick="saveLease()">Save</button>
+            </div>
+        </div>
+        
+        <div id="maintenance" class="section" style="display:none;">
+            <h2>Maintenance Requests</h2>
+            <button onclick="loadMaintenance()">Load All</button>
+            <button onclick="filterByStatus()">Filter by Status</button>
+            <input id="statusFilter" placeholder="Status"><br>
+            <button onclick="filterByPriority()">Filter by Priority</button>
+            <input id="priorityFilter" placeholder="Priority"><br>
+            <button onclick="showMaintenanceForm()">Add Request</button>
+            <div id="maintenanceList"></div>
+            <div id="maintenanceForm" style="display:none;">
+                <input id="mDesc" placeholder="Description"><br>
+                <input id="mStatus" placeholder="Status"><br>
+                <input id="mPriority" placeholder="Priority"><br>
+                <input id="mUnitId" placeholder="Unit ID"><br>
+                <input id="mTenantId" placeholder="Tenant ID"><br>
+                <button onclick="saveMaintenance()">Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
+
+
+
+
