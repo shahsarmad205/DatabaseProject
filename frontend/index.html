@@ -1,101 +1,536 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apartment Management System</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Apartment Management System</h1>
-        <nav>
-            <button onclick="showSection('buildings')">Buildings</button>
-            <button onclick="showSection('units')">Units</button>
-            <button onclick="showSection('tenants')">Tenants</button>
-            <button onclick="showSection('leases')">Leases</button>
-            <button onclick="showSection('maintenance')">Maintenance</button>
-        </nav>
-        
-        <div id="buildings" class="section">
-            <h2>Buildings</h2>
-            <button onclick="loadBuildings()">Load Buildings</button>
-            <button onclick="showBuildingForm()">Add Building</button>
-            <div id="buildingsList"></div>
-            <div id="buildingForm" style="display:none;">
-                <input id="bName" placeholder="Name"><br>
-                <input id="bAddress" placeholder="Address"><br>
-                <button onclick="saveBuilding()">Save</button>
-            </div>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-content">
+          <h1 class="app-title">
+            <span class="icon">🏢</span>
+            Apartment Management System
+          </h1>
+          <div class="header-subtitle">Property Management Made Simple</div>
         </div>
-        
-        <div id="units" class="section" style="display:none;">
+      </header>
+
+      <nav class="main-nav">
+        <button
+          class="nav-btn active"
+          onclick="showSection('buildings')"
+          data-section="buildings"
+        >
+          <span class="nav-icon">🏗️</span>
+          <span class="nav-text">Buildings</span>
+        </button>
+        <button
+          class="nav-btn"
+          onclick="showSection('units')"
+          data-section="units"
+        >
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Units</span>
+        </button>
+        <button
+          class="nav-btn"
+          onclick="showSection('tenants')"
+          data-section="tenants"
+        >
+          <span class="nav-icon">👥</span>
+          <span class="nav-text">Tenants</span>
+        </button>
+        <button
+          class="nav-btn"
+          onclick="showSection('leases')"
+          data-section="leases"
+        >
+          <span class="nav-icon">📄</span>
+          <span class="nav-text">Leases</span>
+        </button>
+        <button
+          class="nav-btn"
+          onclick="showSection('maintenance')"
+          data-section="maintenance"
+        >
+          <span class="nav-icon">🔧</span>
+          <span class="nav-text">Maintenance</span>
+        </button>
+      </nav>
+
+      <main class="main-content">
+        <!-- Buildings Section -->
+        <div id="buildings" class="section active">
+          <div class="section-header">
+            <h2>Buildings Management</h2>
+            <button class="btn btn-primary" onclick="showBuildingForm()">
+              <span>+</span> Add Building
+            </button>
+          </div>
+
+          <div class="action-bar">
+            <button class="btn btn-secondary" onclick="loadBuildings()">
+              <span>🔄</span> Refresh
+            </button>
+          </div>
+
+          <div id="buildingsList" class="data-container">
+            <div class="empty-state">
+              <span class="empty-icon">🏢</span>
+              <p>No buildings loaded. Click "Refresh" to load buildings.</p>
+            </div>
+          </div>
+
+          <div id="buildingForm" class="modal" style="display: none">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Add New Building</h3>
+                <button class="close-btn" onclick="closeBuildingForm()">
+                  &times;
+                </button>
+              </div>
+              <form
+                class="form"
+                onsubmit="event.preventDefault(); saveBuilding();"
+              >
+                <div class="form-group">
+                  <label for="bName">Building Name *</label>
+                  <input
+                    type="text"
+                    id="bName"
+                    placeholder="Enter building name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="bAddress">Address *</label>
+                  <input
+                    type="text"
+                    id="bAddress"
+                    placeholder="Enter full address"
+                    required
+                  />
+                </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeBuildingForm()"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Building
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Units Section -->
+        <div id="units" class="section" style="display: none">
+          <div class="section-header">
             <h2>Apartment Units</h2>
-            <button onclick="loadUnits()">Load Units</button>
-            <button onclick="showUnitForm()">Add Unit</button>
-            <div id="unitsList"></div>
-            <div id="unitForm" style="display:none;">
-                <input id="uNumber" placeholder="Unit Number"><br>
-                <input id="uBedrooms" placeholder="Bedrooms"><br>
-                <input id="uRent" placeholder="Rent"><br>
-                <input id="uBuildingId" placeholder="Building ID"><br>
-                <button onclick="saveUnit()">Save</button>
+            <button class="btn btn-primary" onclick="showUnitForm()">
+              <span>+</span> Add Unit
+            </button>
+          </div>
+
+          <div class="action-bar">
+            <button class="btn btn-secondary" onclick="loadUnits()">
+              <span>🔄</span> Refresh
+            </button>
+          </div>
+
+          <div id="unitsList" class="data-container">
+            <div class="empty-state">
+              <span class="empty-icon">🏠</span>
+              <p>No units loaded. Click "Refresh" to load units.</p>
             </div>
+          </div>
+
+          <div id="unitForm" class="modal" style="display: none">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Add New Unit</h3>
+                <button class="close-btn" onclick="closeUnitForm()">
+                  &times;
+                </button>
+              </div>
+              <form class="form" onsubmit="event.preventDefault(); saveUnit();">
+                <div class="form-group">
+                  <label for="uNumber">Unit Number *</label>
+                  <input
+                    type="text"
+                    id="uNumber"
+                    placeholder="e.g., 101, 2A"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="uBedrooms">Bedrooms *</label>
+                  <input
+                    type="number"
+                    id="uBedrooms"
+                    placeholder="Number of bedrooms"
+                    min="0"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="uRent">Monthly Rent ($) *</label>
+                  <input
+                    type="number"
+                    id="uRent"
+                    placeholder="0.00"
+                    step="0.01"
+                    min="0"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="uBuildingId">Building ID *</label>
+                  <input
+                    type="number"
+                    id="uBuildingId"
+                    placeholder="Enter building ID"
+                    required
+                  />
+                </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeUnitForm()"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Unit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        
-        <div id="tenants" class="section" style="display:none;">
+
+        <!-- Tenants Section -->
+        <div id="tenants" class="section" style="display: none">
+          <div class="section-header">
             <h2>Tenants</h2>
-            <button onclick="loadTenants()">Load Tenants</button>
-            <button onclick="showTenantForm()">Add Tenant</button>
-            <div id="tenantsList"></div>
-            <div id="tenantForm" style="display:none;">
-                <input id="tName" placeholder="Name"><br>
-                <input id="tEmail" placeholder="Email"><br>
-                <input id="tPhone" placeholder="Phone"><br>
-                <button onclick="saveTenant()">Save</button>
+            <button class="btn btn-primary" onclick="showTenantForm()">
+              <span>+</span> Add Tenant
+            </button>
+          </div>
+
+          <div class="action-bar">
+            <button class="btn btn-secondary" onclick="loadTenants()">
+              <span>🔄</span> Refresh
+            </button>
+          </div>
+
+          <div id="tenantsList" class="data-container">
+            <div class="empty-state">
+              <span class="empty-icon">👥</span>
+              <p>No tenants loaded. Click "Refresh" to load tenants.</p>
             </div>
+          </div>
+
+          <div id="tenantForm" class="modal" style="display: none">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Add New Tenant</h3>
+                <button class="close-btn" onclick="closeTenantForm()">
+                  &times;
+                </button>
+              </div>
+              <form
+                class="form"
+                onsubmit="event.preventDefault(); saveTenant();"
+              >
+                <div class="form-group">
+                  <label for="tName">Full Name *</label>
+                  <input
+                    type="text"
+                    id="tName"
+                    placeholder="Enter tenant name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="tEmail">Email *</label>
+                  <input
+                    type="email"
+                    id="tEmail"
+                    placeholder="tenant@example.com"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="tPhone">Phone *</label>
+                  <input
+                    type="tel"
+                    id="tPhone"
+                    placeholder="(555) 123-4567"
+                    required
+                  />
+                </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeTenantForm()"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Tenant
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        
-        <div id="leases" class="section" style="display:none;">
+
+        <!-- Leases Section -->
+        <div id="leases" class="section" style="display: none">
+          <div class="section-header">
             <h2>Lease Agreements</h2>
-            <button onclick="loadLeases()">Load All Leases</button>
-            <button onclick="loadActiveLeases()">Load Active Leases</button>
-            <button onclick="showLeaseForm()">Add Lease</button>
-            <div id="leasesList"></div>
-            <div id="leaseForm" style="display:none;">
-                <input id="lStartDate" type="date" placeholder="Start Date"><br>
-                <input id="lEndDate" type="date" placeholder="End Date"><br>
-                <input id="lRent" placeholder="Monthly Rent"><br>
-                <input id="lActive" type="checkbox"> Active<br>
-                <input id="lTenantId" placeholder="Tenant ID"><br>
-                <input id="lUnitId" placeholder="Unit ID"><br>
-                <button onclick="saveLease()">Save</button>
+            <button class="btn btn-primary" onclick="showLeaseForm()">
+              <span>+</span> Add Lease
+            </button>
+          </div>
+
+          <div class="action-bar">
+            <button class="btn btn-secondary" onclick="loadLeases()">
+              <span>📋</span> All Leases
+            </button>
+            <button class="btn btn-secondary" onclick="loadActiveLeases()">
+              <span>✅</span> Active Leases
+            </button>
+          </div>
+
+          <div id="leasesList" class="data-container">
+            <div class="empty-state">
+              <span class="empty-icon">📄</span>
+              <p>
+                No leases loaded. Click "All Leases" or "Active Leases" to load
+                data.
+              </p>
             </div>
+          </div>
+
+          <div id="leaseForm" class="modal" style="display: none">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Add New Lease</h3>
+                <button class="close-btn" onclick="closeLeaseForm()">
+                  &times;
+                </button>
+              </div>
+              <form
+                class="form"
+                onsubmit="event.preventDefault(); saveLease();"
+              >
+                <div class="form-group">
+                  <label for="lStartDate">Start Date *</label>
+                  <input type="date" id="lStartDate" required />
+                </div>
+                <div class="form-group">
+                  <label for="lEndDate">End Date *</label>
+                  <input type="date" id="lEndDate" required />
+                </div>
+                <div class="form-group">
+                  <label for="lRent">Monthly Rent ($) *</label>
+                  <input
+                    type="number"
+                    id="lRent"
+                    placeholder="0.00"
+                    step="0.01"
+                    min="0"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="lTenantId">Tenant ID *</label>
+                  <input
+                    type="number"
+                    id="lTenantId"
+                    placeholder="Enter tenant ID"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="lUnitId">Unit ID *</label>
+                  <input
+                    type="number"
+                    id="lUnitId"
+                    placeholder="Enter unit ID"
+                    required
+                  />
+                </div>
+                <div class="form-group checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="lActive" checked />
+                    <span>Active Lease</span>
+                  </label>
+                </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeLeaseForm()"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Lease
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        
-        <div id="maintenance" class="section" style="display:none;">
+
+        <!-- Maintenance Section -->
+        <div id="maintenance" class="section" style="display: none">
+          <div class="section-header">
             <h2>Maintenance Requests</h2>
-            <button onclick="loadMaintenance()">Load All</button>
-            <button onclick="filterByStatus()">Filter by Status</button>
-            <input id="statusFilter" placeholder="Status"><br>
-            <button onclick="filterByPriority()">Filter by Priority</button>
-            <input id="priorityFilter" placeholder="Priority"><br>
-            <button onclick="showMaintenanceForm()">Add Request</button>
-            <div id="maintenanceList"></div>
-            <div id="maintenanceForm" style="display:none;">
-                <input id="mDesc" placeholder="Description"><br>
-                <input id="mStatus" placeholder="Status"><br>
-                <input id="mPriority" placeholder="Priority"><br>
-                <input id="mUnitId" placeholder="Unit ID"><br>
-                <input id="mTenantId" placeholder="Tenant ID"><br>
-                <button onclick="saveMaintenance()">Save</button>
+            <button class="btn btn-primary" onclick="showMaintenanceForm()">
+              <span>+</span> Add Request
+            </button>
+          </div>
+
+          <div class="action-bar">
+            <button class="btn btn-secondary" onclick="loadMaintenance()">
+              <span>🔄</span> All Requests
+            </button>
+            <div class="filter-group">
+              <input
+                type="text"
+                id="statusFilter"
+                placeholder="Filter by status (e.g., Pending)"
+                class="filter-input"
+              />
+              <button class="btn btn-secondary" onclick="filterByStatus()">
+                <span>🔍</span> Filter Status
+              </button>
             </div>
+            <div class="filter-group">
+              <input
+                type="text"
+                id="priorityFilter"
+                placeholder="Filter by priority (e.g., High)"
+                class="filter-input"
+              />
+              <button class="btn btn-secondary" onclick="filterByPriority()">
+                <span>🔍</span> Filter Priority
+              </button>
+            </div>
+          </div>
+
+          <div id="maintenanceList" class="data-container">
+            <div class="empty-state">
+              <span class="empty-icon">🔧</span>
+              <p>
+                No maintenance requests loaded. Click "All Requests" to load
+                data.
+              </p>
+            </div>
+          </div>
+
+          <div id="maintenanceForm" class="modal" style="display: none">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Add Maintenance Request</h3>
+                <button class="close-btn" onclick="closeMaintenanceForm()">
+                  &times;
+                </button>
+              </div>
+              <form
+                class="form"
+                onsubmit="event.preventDefault(); saveMaintenance();"
+              >
+                <div class="form-group">
+                  <label for="mDesc">Description *</label>
+                  <textarea
+                    id="mDesc"
+                    placeholder="Describe the maintenance issue"
+                    rows="4"
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="mStatus">Status *</label>
+                  <select id="mStatus" required>
+                    <option value="">Select status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="mPriority">Priority *</label>
+                  <select id="mPriority" required>
+                    <option value="">Select priority</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Urgent">Urgent</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="mUnitId">Unit ID *</label>
+                  <input
+                    type="number"
+                    id="mUnitId"
+                    placeholder="Enter unit ID"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="mTenantId">Tenant ID *</label>
+                  <input
+                    type="number"
+                    id="mTenantId"
+                    placeholder="Enter tenant ID"
+                    required
+                  />
+                </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeMaintenanceForm()"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Request
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+      </main>
+
+      <div id="loadingOverlay" class="loading-overlay" style="display: none">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+
+      <div id="notification" class="notification" style="display: none"></div>
     </div>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
-
-
-
-
